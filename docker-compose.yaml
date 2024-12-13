@@ -1,0 +1,11 @@
+services:
+  kotlin-dev-compiler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: kotlin-dev-compiler
+    image: kotlin-dev:latest
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: ["tail", "-f", "/dev/null"]
