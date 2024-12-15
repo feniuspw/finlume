@@ -19,11 +19,14 @@ data class AssetAccount(
 
     private fun validateCanWithdraw(amount: Double) {
         require(amount > 0) { "Withdrawal amount must be positive" }
-//        require(balance >= amount) { "Insufficient funds" }
+    }
+
+    private fun validateCanDeposit(amount: Double) {
+        require(amount > 0) { "Deposit amount must be positive" }
     }
 
     private fun deposit(amount: Double): Double {
-        require(amount > 0) { "Deposit amount must be positive" }
+        validateCanDeposit(amount)
         balance += amount
         return balance
     }
@@ -34,18 +37,9 @@ data class AssetAccount(
         return balance
     }
 
-    fun transferTo(account: AssetAccount, amount: Double): Boolean {
-        withdraw(amount)
-        return try {
-            account.deposit(amount)
-            true
-        } catch (e: Exception) {
-            deposit(amount)
-            false
-        }
-    }
-
     fun makeDeposit(amount: Double): Double = deposit(amount)
+
+    fun makeWithdraw(amount: Double): Double = withdraw(amount)
 
     fun getBalance(): Double = balance
 
