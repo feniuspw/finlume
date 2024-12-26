@@ -15,7 +15,6 @@ class BillService(
     }
 
     override fun updateBill(bill: Bill): Bill {
-
         return billRepositoryPort.save(bill)
     }
 
@@ -25,5 +24,9 @@ class BillService(
 
     override fun getBill(id: UUID): Bill? {
         return billRepositoryPort.findById(id)
+    }
+
+    override fun getUserBills(userId: UUID): List<Bill>? {
+        return billRepositoryPort.findByUserId(userId)
     }
 }

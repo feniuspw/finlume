@@ -7,4 +7,5 @@ interface BillRepositoryPort {
     fun save(bill: Bill): Bill
     fun delete(id: UUID)
     fun findById(id: UUID): Bill?
+    fun findByUserId(userId: UUID): List<Bill>?
 }

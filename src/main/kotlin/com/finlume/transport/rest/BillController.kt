@@ -20,7 +20,7 @@ class BillController(
 
     @PostMapping
     fun createBill(@RequestBody request: CreateOrUpdateBillRequest): ResponseEntity<Bill> {
-        val user = User(email = "test@example.com", password = "password123")
+        val user = User(id=UUID.fromString("c71bb851-1066-48a3-b474-22d29e7d9ecf"), email = "test@example.com", password = "password123")
         val currency = Currency(1, code = "BRL", name = "Real Brasileiro", symbol = "R$")
         val bill = Bill(
             user = user,
@@ -43,7 +43,7 @@ class BillController(
 
     @PutMapping("/{id}")
     fun updateBill(@PathVariable id: UUID, @RequestBody request: CreateOrUpdateBillRequest): ResponseEntity<Bill> {
-        val user = User(email = "test@example.com", password = "password123")
+        val user = User(id=UUID.fromString("c71bb851-1066-48a3-b474-22d29e7d9ecf"), email = "test@example.com", password = "password123")
         val currency = Currency(1, code = "BRL", name = "Real Brasileiro", symbol = "R$")
         val updateBill = Bill(
             id = id,
@@ -70,6 +70,10 @@ class BillController(
         return ResponseEntity.noContent().build()
     }
 
+    @GetMapping("/my/{id}")
+    fun getUserBills(@PathVariable id: UUID): ResponseEntity<List<Bill>> {
+        return ResponseEntity.ok(billPort.getUserBills(id))
+    }
 }
 
 data class CreateOrUpdateBillRequest(

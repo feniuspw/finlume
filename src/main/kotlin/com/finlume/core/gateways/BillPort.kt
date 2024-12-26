@@ -8,4 +8,5 @@ interface BillPort {
     fun updateBill(bill: Bill): Bill
     fun deleteBill(id: UUID)
     fun getBill(id: UUID): Bill?
+    fun getUserBills(userId: UUID): List<Bill>?
 }

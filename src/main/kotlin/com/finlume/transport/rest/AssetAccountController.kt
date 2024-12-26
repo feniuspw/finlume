@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import java.util.*
 
 
 @RestController
@@ -21,7 +22,7 @@ class AssetAccountController(
 
     @PostMapping
     fun createAccount(@RequestBody request: CreateAccountRequest): ResponseEntity<AssetAccount> {
-        val user = User(email = "test@example.com", password = "password123")
+        val user = User(id= UUID.fromString("c71bb851-1066-48a3-b474-22d29e7d9ecf"), email = "test@example.com", password = "password123")
         val currency = Currency(1, code = "BRL", name = "Real Brasileiro", symbol = "R$")
         val account = AssetAccount(
             user = user,
