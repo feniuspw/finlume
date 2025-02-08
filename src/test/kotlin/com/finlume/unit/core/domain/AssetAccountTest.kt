@@ -1,5 +1,8 @@
-package com.finlume.core.domain
+package com.finlume.unit.core.domain
 
+import com.finlume.core.domain.AssetAccount
+import com.finlume.core.domain.Currency
+import com.finlume.core.domain.User
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
