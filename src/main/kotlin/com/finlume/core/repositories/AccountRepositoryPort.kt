@@ -8,5 +8,5 @@ interface AccountRepositoryPort {
     fun findById(id: UUID): Account?
     fun listAll(): List<Account>?
     fun update(account: Account): Account
-    fun delete(id: UUID)
+    fun softDelete(id: UUID)
 }

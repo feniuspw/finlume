@@ -3,6 +3,7 @@ package com.finlume.infrastructure.external.database.memory
 import com.finlume.core.domain.Account
 import com.finlume.core.repositories.AccountRepositoryPort
 import org.springframework.stereotype.Component
+import java.time.LocalDateTime
 import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
 
@@ -35,7 +36,9 @@ class InMemoryAccountRepositoryAdapter: AccountRepositoryPort {
         return account
     }
 
-    override fun delete(id: UUID) {
-        storage.remove(id)
+    override fun softDelete(id: UUID) {
+        val account = storage[id] ?: throw IllegalArgumentException("Account with ID $id does not exist.")
+        val updatedAccount = account.copy(active = false, lastUpdated = LocalDateTime.now())
+        storage[id] = updatedAccount
     }
 }

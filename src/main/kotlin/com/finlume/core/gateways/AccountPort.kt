@@ -2,15 +2,14 @@ package com.finlume.core.gateways
 
 
 import com.finlume.core.domain.Account
+import com.finlume.core.dto.account.CreateAccountDTO
+import com.finlume.core.dto.account.UpdateAccountDTO
 import java.util.*
 
 interface AccountPort {
-    fun createAccount(account: Account): Account
-    fun getAccount(id: UUID): Account?
-    fun listAccounts(): List<Account>?
-    fun updateAccount(account: Account): Account
+    fun createAccount(request: CreateAccountDTO): Account
+    fun findAccountById(id: UUID): Account?
+    fun findAllAccounts(): List<Account>?
+    fun updateAccount(request: UpdateAccountDTO, id: UUID): Account
     fun deleteAccount(id: UUID)
-//    fun withdrawFromAccount(id: UUID, amount: Double): Boolean
-//    fun depositToAccount(id: UUID, amount: Double): Boolean
-//    fun transferBetweenAccounts(fromAccountID: UUID, toAccountID: UUID, amount: Double): Boolean
 }

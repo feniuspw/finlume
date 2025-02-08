@@ -9,7 +9,7 @@ data class Account(
     val name: String,
     val currency: Currency,
     val description: String = "",
-    val status: Boolean = true,
+    val active: Boolean = true,
     val creation: LocalDateTime = LocalDateTime.now(),
     val lastUpdated: LocalDateTime = LocalDateTime.now()
 
