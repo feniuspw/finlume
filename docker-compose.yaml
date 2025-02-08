@@ -5,6 +5,8 @@ services:
       dockerfile: Dockerfile
     container_name: kotlin-dev-compiler
     image: kotlin-dev:latest
+    ports:
+      - "8080:8080"
     volumes:
       - .:/app
     working_dir: /app

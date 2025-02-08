@@ -15,13 +15,13 @@ import java.util.*
 
 
 @RestController
-@RequestMapping("/accounts")
+@RequestMapping("/asset-accounts")
 class AssetAccountController(
     private val assetAccountPort: AssetAccountPort
 ) {
 
     @PostMapping
-    fun createAccount(@RequestBody request: CreateAccountRequest): ResponseEntity<AssetAccount> {
+    fun createAccount(@RequestBody request: CreateAssetAccountRequest): ResponseEntity<AssetAccount> {
         val user = User(id= UUID.fromString("c71bb851-1066-48a3-b474-22d29e7d9ecf"), email = "test@example.com", password = "password123")
         val currency = Currency(1, code = "BRL", name = "Real Brasileiro", symbol = "R$")
         val account = AssetAccount(
@@ -40,7 +40,7 @@ class AssetAccountController(
     }
 }
 
-data class CreateAccountRequest(
+data class CreateAssetAccountRequest(
     val name: String,
     val balance: Double
 )
