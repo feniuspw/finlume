@@ -73,7 +73,7 @@ class AccountServiceTest {
 
         // Assert
         assertNotNull(accountRetornada)
-        assertEquals("Conta Encontrada", accountRetornada!!.name)
+        assertEquals("Conta Encontrada", accountRetornada.name)
         verify(exactly = 1) { repository.findById(accountId) }
     }
 

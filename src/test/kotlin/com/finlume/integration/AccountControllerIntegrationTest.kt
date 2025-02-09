@@ -2,7 +2,6 @@ package com.finlume.integration
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.finlume.core.domain.Account
-import com.finlume.core.dto.account.CreateAccountDTO
 import com.finlume.core.dto.account.UpdateAccountDTO
 import com.finlume.transport.rest.dto.CreateAccountRequestDTO
 import org.junit.jupiter.api.AfterEach
