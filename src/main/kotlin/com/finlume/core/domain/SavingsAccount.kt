@@ -11,7 +11,7 @@ data class SavingsAccount(
     private var balance: Double,
     private val interestRate: Double = 0.0,
     private val interestInterval: Int = 0, // days
-    private val lastInterestRateDate: LocalDateTime,
+    private val lastInterestRateDate: LocalDateTime = LocalDateTime.now(),
 ) {
     init {
         require(name.isNotBlank()) { "Account name must not be blank" }
