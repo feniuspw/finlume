@@ -2,8 +2,8 @@ package com.finlume.web
 
 import com.finlume.core.domain.Account
 import com.finlume.core.domain.Currency
-import com.finlume.core.dto.account.CreateAccountDTO
-import com.finlume.core.dto.account.UpdateAccountDTO
+import com.finlume.core.command.CreateAccountCommand
+import com.finlume.core.command.UpdateAccountCommand
 import com.finlume.core.gateways.AccountPort
 import com.finlume.transport.rest.dto.CreateAccountRequestDTO
 import org.springframework.http.HttpStatus
@@ -21,7 +21,7 @@ class AccountController(
     @PostMapping
     fun createAccount(@RequestBody request: CreateAccountRequestDTO): ResponseEntity<Account> {
         val currency = Currency(1, code = "BRL", name = "Real Brasileiro", symbol = "R$")
-        val createRequest = CreateAccountDTO(
+        val createRequest = CreateAccountCommand(
             name = request.name,
             currency = currency,
             description = request.description
@@ -45,7 +45,7 @@ class AccountController(
     @PatchMapping("/{id}")
     fun updateAccount(
         @PathVariable id: UUID,
-        @RequestBody request: UpdateAccountDTO
+        @RequestBody request: UpdateAccountCommand
     ): ResponseEntity<Account> {
 
         return ResponseEntity.ok(accountPort.updateAccount(request, id))

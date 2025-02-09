@@ -1,8 +1,8 @@
 package com.finlume.core.services
 
 import com.finlume.core.domain.Account
-import com.finlume.core.dto.account.CreateAccountDTO
-import com.finlume.core.dto.account.UpdateAccountDTO
+import com.finlume.core.command.CreateAccountCommand
+import com.finlume.core.command.UpdateAccountCommand
 import com.finlume.core.gateways.AccountPort
 import com.finlume.core.repositories.AccountRepositoryPort
 import com.finlume.core.services.exceptions.AccountNotFoundException
@@ -16,7 +16,7 @@ class AccountService(
     private val accountRepository: AccountRepositoryPort
 
 ): AccountPort {
-    override fun createAccount(request: CreateAccountDTO): Account {
+    override fun createAccount(request: CreateAccountCommand): Account {
 
         val account = Account(
             name = request.name,
@@ -35,7 +35,7 @@ class AccountService(
         return accountRepository.listAll()
     }
 
-    override fun updateAccount(request: UpdateAccountDTO, id: UUID): Account {
+    override fun updateAccount(request: UpdateAccountCommand, id: UUID): Account {
         // Get existing account
         val existingAccount: Account = accountRepository.findById(id)
         ?: throw AccountNotFoundException("Account with id: $id not found")

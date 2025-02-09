@@ -2,7 +2,7 @@ package com.finlume.integration
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.finlume.core.domain.Account
-import com.finlume.core.dto.account.UpdateAccountDTO
+import com.finlume.core.command.UpdateAccountCommand
 import com.finlume.transport.rest.dto.CreateAccountRequestDTO
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -100,7 +100,7 @@ class AccountControllerIntegrationTest @Autowired constructor(
     @Test
     fun `PATCH update account updates only provided fields`() {
         // Atualiza apenas o campo description (o name permanece o mesmo)
-        val updateDTO = UpdateAccountDTO(
+        val updateDTO = UpdateAccountCommand(
             name = null, // Não altera o nome
             description = "Updated Description"
         )

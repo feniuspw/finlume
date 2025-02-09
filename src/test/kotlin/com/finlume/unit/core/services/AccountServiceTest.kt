@@ -2,8 +2,8 @@ package com.finlume.unit.core.services
 
 import com.finlume.core.domain.Account
 import com.finlume.core.domain.Currency
-import com.finlume.core.dto.account.CreateAccountDTO
-import com.finlume.core.dto.account.UpdateAccountDTO
+import com.finlume.core.command.CreateAccountCommand
+import com.finlume.core.command.UpdateAccountCommand
 import com.finlume.core.repositories.AccountRepositoryPort
 import com.finlume.core.services.AccountService
 import io.mockk.every
@@ -30,7 +30,7 @@ class AccountServiceTest {
         // Arrange
         val currency = Currency(1, code = "BRL", name = "Real Brasileiro", symbol = "R$")
 
-        val createDTO = CreateAccountDTO(
+        val createDTO = CreateAccountCommand(
             name = "Conta Teste",
             description = "Descrição de teste",
             currency = currency
@@ -137,7 +137,7 @@ class AccountServiceTest {
             creation = LocalDateTime.now(),
             lastUpdated = LocalDateTime.now()
         )
-        val updateDTO = UpdateAccountDTO(
+        val updateDTO = UpdateAccountCommand(
             name = "New Name",
             description = "New Description"
         )

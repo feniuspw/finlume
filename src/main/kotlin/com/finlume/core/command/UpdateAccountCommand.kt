@@ -1,6 +1,6 @@
-package com.finlume.core.dto.account
+package com.finlume.core.command
 
-class UpdateAccountDTO (
+class UpdateAccountCommand (
     val name: String? = null,
     val description: String? = null
 )
