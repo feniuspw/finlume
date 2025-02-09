@@ -1,6 +1,5 @@
 package com.finlume.core.domain
 
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.*
 
@@ -10,16 +9,16 @@ data class SavingsAccount(
     val account: Account,
     val name: String,
     private var balance: Double,
-    private val interestRate: Double,
-    private val interestInterval: Int, // days
-    private val lastInterestRateDate: LocalDate,
+    private val interestRate: Double = 0.0,
+    private val interestInterval: Int = 0, // days
+    private val lastInterestRateDate: LocalDateTime,
 ) {
     init {
         require(name.isNotBlank()) { "Account name must not be blank" }
         require(balance >= 0) { "Initial balance cannot be negative" }
         require(interestRate >= 0) { "Interest rate must be positive" }
         require(interestInterval >= 0) { "Interest interval must be positive" }
-        require(!lastInterestRateDate.isAfter(LocalDate.now())) {
+        require(!lastInterestRateDate.isAfter(LocalDateTime.now())) {
             "Last interest rate date cannot be in the future"
         }
     }

@@ -31,8 +31,8 @@ class AccountService(
         return accountRepository.findById(id) ?: throw AccountNotFoundException("Account with id: $id not found")
     }
 
-    override fun findAllAccounts(): List<Account> {
-        return accountRepository.listAll()?: throw AccountNotFoundException("No Accounts found")
+    override fun findAllAccounts(): List<Account>? {
+        return accountRepository.listAll()
     }
 
     override fun updateAccount(request: UpdateAccountDTO, id: UUID): Account {

@@ -6,7 +6,6 @@ import com.finlume.core.dto.account.CreateAccountDTO
 import com.finlume.core.dto.account.UpdateAccountDTO
 import com.finlume.core.gateways.AccountPort
 import com.finlume.transport.rest.dto.CreateAccountRequestDTO
-import org.apache.coyote.Response
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -32,7 +31,7 @@ class AccountController(
     }
 
     @GetMapping
-    fun findAllAccounts(): ResponseEntity<List<Account>> {
+    fun findAllAccounts(): ResponseEntity<List<Account>?> {
         return ResponseEntity.ok(accountPort.findAllAccounts())
     }
 
