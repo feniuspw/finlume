@@ -6,12 +6,14 @@ import com.finlume.core.command.CreateAccountCommand
 import com.finlume.core.command.UpdateAccountCommand
 import com.finlume.core.repositories.AccountRepositoryPort
 import com.finlume.core.services.AccountService
+import com.finlume.core.services.exceptions.AccountNotFoundException
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import io.mockk.slot
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import java.time.LocalDateTime
 import java.util.*
 
@@ -78,16 +80,18 @@ class AccountServiceTest {
     }
 
     @Test
-    fun `findAccountById deve retornar null se account nao for encontrada`() {
+    fun `findAccountById should throw AccountNotFoundException if account is not found`() {
         // Arrange
         val accountId = UUID.randomUUID()
         every { repository.findById(accountId) } returns null
 
-        // Act
-        val resultado = accountService.findAccountById(accountId)
+        // Act & Assert usando assertThrows com lambda envolvido em parênteses:
+        val exception = assertThrows<AccountNotFoundException>{
+            accountService.findAccountById(accountId)
+        }
 
-        // Assert
-        assertNull(resultado)
+        // Verifica se a mensagem da exceção está conforme esperado:
+        assertEquals("Account with id: $accountId not found", exception.message)
         verify(exactly = 1) { repository.findById(accountId) }
     }
 
