@@ -6,12 +6,13 @@ import com.finlume.core.command.WithdrawSavingsAccountCommand
 import com.finlume.core.domain.SavingsAccount
 import com.finlume.core.gateways.SavingsAccountPort
 import com.finlume.core.repositories.SavingsAccountRepositoryPort
+import com.finlume.core.services.exceptions.SavingsAccountNotFoundException
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
 class SavingsAccountService(
-//    private val savingsAccountRepository: SavingsAccountRepositoryPort
+   private val savingsAccountRepository: SavingsAccountRepositoryPort
 ): SavingsAccountPort{
     override fun createSavingsAccount(createSavingsAccountCommand: CreateSavingsAccountCommand): SavingsAccount {
 
@@ -22,8 +23,7 @@ class SavingsAccountService(
             interestRate = createSavingsAccountCommand.interestRate,
             interestInterval = createSavingsAccountCommand.interestInterval,
         )
-//        return savingsAccountRepository.save(savingsAccount)
-        return savingsAccount
+       return savingsAccountRepository.save(savingsAccount)
     }
 
     override fun updateSavingsAccount(updateSavingsAccountCommand: UpdateSavingsAccountCommand) {
@@ -35,11 +35,11 @@ class SavingsAccountService(
     }
 
     override fun findById(id: UUID): SavingsAccount? {
-        TODO("Not yet implemented")
+        return savingsAccountRepository.findById(id)?: throw SavingsAccountNotFoundException("SavingsAccount with ID $id not found") 
     }
 
     override fun findByAccountId(accountId: UUID): List<SavingsAccount>? {
-        TODO("Not yet implemented")
+        return savingsAccountRepository.findByAccountId(accountId)
     }
 
     override fun deposit(depositCommand: DepositSavingsAccountCommand) {

@@ -25,5 +25,11 @@ data class SavingsAccount(
     fun getBalance(): Double = balance
     fun getInterestRate(): Double = interestRate
     fun calculateInterest(): Double = balance * interestRate
+    fun deposit(amount: Double) {
+        balance += amount
+    }
+    fun withdraw(amount: Double) {
+        balance -= amount
+    }
 
 }
