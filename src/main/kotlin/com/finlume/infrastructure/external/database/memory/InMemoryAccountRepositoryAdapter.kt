@@ -25,7 +25,8 @@ class InMemoryAccountRepositoryAdapter: AccountRepositoryPort {
     }
 
     override fun listAll(): List<Account>? {
-        return storage.values.toList()
+        val values = storage.values.toList()
+        return values.ifEmpty { null }
     }
 
     override fun update(account: Account): Account {

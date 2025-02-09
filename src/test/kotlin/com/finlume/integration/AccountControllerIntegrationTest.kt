@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.finlume.core.domain.Account
 import com.finlume.core.dto.account.CreateAccountDTO
 import com.finlume.core.dto.account.UpdateAccountDTO
+import com.finlume.transport.rest.dto.CreateAccountRequestDTO
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -30,9 +31,10 @@ class AccountControllerIntegrationTest @Autowired constructor(
     fun setup() {
         // Cria uma conta via endpoint POST para garantir que o fluxo completo seja testado.
         // (Assumindo que existe um endpoint POST /accounts que cria a conta e retorna status 201)
-        val createAccountDTO = CreateAccountDTO(
+        val createAccountDTO = CreateAccountRequestDTO(
             name = "Test Account",
-            description = "Integration test account"
+            description = "Integration test account",
+            currencyCode = 1
         )
         val result = mockMvc.perform(
             post("/accounts")
@@ -56,9 +58,10 @@ class AccountControllerIntegrationTest @Autowired constructor(
     @Test
     fun `POST create account successfully`() {
         // Arrange: Cria o DTO com os dados para criação da conta.
-        val createAccountDTO = CreateAccountDTO(
+        val createAccountDTO = CreateAccountRequestDTO(
             name = "Integration Account",
-            description = "Testing account creation via integration test"
+            description = "Testing account creation via integration test",
+            currencyCode = 1
         )
 
         // Act & Assert: Faz uma requisição POST para o endpoint e valida o retorno.

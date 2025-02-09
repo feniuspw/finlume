@@ -28,10 +28,14 @@ class AccountServiceTest {
     @Test
     fun `createAccount deve criar e retornar uma account`() {
         // Arrange
+        val currency = Currency(1, code = "BRL", name = "Real Brasileiro", symbol = "R$")
+
         val createDTO = CreateAccountDTO(
             name = "Conta Teste",
-            description = "Descrição de teste"
+            description = "Descrição de teste",
+            currency = currency
         )
+
         // Usamos um slot para capturar a Account passada para o repositório
         val accountSlot = slot<Account>()
         every { repository.create(capture(accountSlot)) } answers { firstArg() }
@@ -74,7 +78,7 @@ class AccountServiceTest {
     }
 
     @Test
-    fun `findAccountById deve retornar null se account não for encontrada`() {
+    fun `findAccountById deve retornar null se account nao for encontrada`() {
         // Arrange
         val accountId = UUID.randomUUID()
         every { repository.findById(accountId) } returns null

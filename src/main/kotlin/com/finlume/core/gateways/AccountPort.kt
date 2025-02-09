@@ -8,8 +8,8 @@ import java.util.*
 
 interface AccountPort {
     fun createAccount(request: CreateAccountDTO): Account
-    fun findAccountById(id: UUID): Account?
-    fun findAllAccounts(): List<Account>?
+    fun findAccountById(id: UUID): Account
+    fun findAllAccounts(): List<Account>
     fun updateAccount(request: UpdateAccountDTO, id: UUID): Account
     fun deleteAccount(id: UUID)
 }

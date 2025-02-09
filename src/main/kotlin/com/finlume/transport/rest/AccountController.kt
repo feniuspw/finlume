@@ -1,9 +1,12 @@
 package com.finlume.web
 
 import com.finlume.core.domain.Account
+import com.finlume.core.domain.Currency
 import com.finlume.core.dto.account.CreateAccountDTO
 import com.finlume.core.dto.account.UpdateAccountDTO
 import com.finlume.core.gateways.AccountPort
+import com.finlume.transport.rest.dto.CreateAccountRequestDTO
+import org.apache.coyote.Response
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -17,21 +20,27 @@ class AccountController(
 ) {
 
     @PostMapping
-    fun createAccount(@RequestBody request: CreateAccountDTO): ResponseEntity<Account> {
-        val createdAccount = accountPort.createAccount(request)
+    fun createAccount(@RequestBody request: CreateAccountRequestDTO): ResponseEntity<Account> {
+        val currency = Currency(1, code = "BRL", name = "Real Brasileiro", symbol = "R$")
+        val createRequest = CreateAccountDTO(
+            name = request.name,
+            currency = currency,
+            description = request.description
+        )
+        val createdAccount = accountPort.createAccount(createRequest)
         return ResponseEntity.status(HttpStatus.CREATED).body(createdAccount)
     }
 
     @GetMapping
     fun findAllAccounts(): ResponseEntity<List<Account>> {
-        return ResponseEntity.status(HttpStatus.OK).body(accountPort.findAllAccounts())
+        return ResponseEntity.ok(accountPort.findAllAccounts())
     }
 
     @GetMapping("/{id}")
     fun findAccountById(
         @PathVariable id: UUID,
     ): ResponseEntity<Account>? {
-        return accountPort.findAccountById(id)?.let { ResponseEntity.ok(it) } ?: ResponseEntity.notFound().build()
+        return ResponseEntity.ok(accountPort.findAccountById(id))
     }
 
     @PatchMapping("/{id}")
@@ -40,7 +49,7 @@ class AccountController(
         @RequestBody request: UpdateAccountDTO
     ): ResponseEntity<Account> {
 
-        return ResponseEntity.status(HttpStatus.OK).body(accountPort.updateAccount(request, id))
+        return ResponseEntity.ok(accountPort.updateAccount(request, id))
     }
 
     @DeleteMapping("{id}")
