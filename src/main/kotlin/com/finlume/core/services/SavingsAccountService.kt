@@ -14,43 +14,54 @@ import java.util.*
 class SavingsAccountService(
    private val savingsAccountRepository: SavingsAccountRepositoryPort
 ): SavingsAccountPort{
-    override fun createSavingsAccount(createSavingsAccountCommand: CreateSavingsAccountCommand): SavingsAccount {
+    override fun createSavingsAccount(createCommand: CreateSavingsAccountCommand): SavingsAccount {
 
         val savingsAccount = SavingsAccount(
-            name = createSavingsAccountCommand.name,
-            balance = createSavingsAccountCommand.balance,
-            account = createSavingsAccountCommand.account,
-            interestRate = createSavingsAccountCommand.interestRate,
-            interestInterval = createSavingsAccountCommand.interestInterval,
+            name = createCommand.name,
+            balance = createCommand.balance,
+            account = createCommand.account,
+            interestRate = createCommand.interestRate,
+            interestInterval = createCommand.interestInterval,
         )
        return savingsAccountRepository.save(savingsAccount)
     }
 
-    override fun updateSavingsAccount(updateSavingsAccountCommand: UpdateSavingsAccountCommand) {
-        TODO("Not yet implemented")
+    override fun updateSavingsAccount(updateCommand: UpdateSavingsAccountCommand): SavingsAccount {
+        val savingsAccount = this.findSavingsAccountById(updateCommand.id)
+        val updatedAccount = savingsAccount.copy(
+            name = updateCommand.name ?: savingsAccount.name,
+            interestRate = updateCommand.interestRate ?: savingsAccount.getInterestRate(),
+            interestInterval = updateCommand.interestInterval ?: savingsAccount.getInterestInterval(),
+        )
+        return savingsAccountRepository.save(updatedAccount)
     }
 
     override fun deleteSavingsAccount(id: UUID) {
-        TODO("Not yet implemented")
+        savingsAccountRepository.delete(id)
     }
 
-    override fun findById(id: UUID): SavingsAccount? {
+    override fun findSavingsAccountById(id: UUID): SavingsAccount {
         return savingsAccountRepository.findById(id)?: throw SavingsAccountNotFoundException("SavingsAccount with ID $id not found") 
     }
 
-    override fun findByAccountId(accountId: UUID): List<SavingsAccount>? {
+    override fun findSavingsAccountByAccountId(accountId: UUID): List<SavingsAccount>? {
         return savingsAccountRepository.findByAccountId(accountId)
     }
 
     override fun deposit(depositCommand: DepositSavingsAccountCommand) {
-        TODO("Not yet implemented")
+        val savingsAccount = this.findSavingsAccountById(depositCommand.id)
+        savingsAccount.deposit(depositCommand.amount)
+        savingsAccountRepository.save(savingsAccount)
     }
 
-    override fun withdraw(withdrawSavingsAccountCommand: WithdrawSavingsAccountCommand) {
-        TODO("Not yet implemented")
+    override fun withdraw(withdrawCommand: WithdrawSavingsAccountCommand) {
+        val savingsAccount = this.findSavingsAccountById(withdrawCommand.id)
+        savingsAccount.withdraw(withdrawCommand.amount)
+        savingsAccountRepository.save(savingsAccount)
     }
 
     override fun getBalance(id: UUID): Double {
-        TODO("Not yet implemented")
+        val savingsAccount = this.findSavingsAccountById(id)
+        return savingsAccount.getBalance()
     }
 }

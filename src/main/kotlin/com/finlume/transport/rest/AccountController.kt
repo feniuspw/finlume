@@ -1,4 +1,4 @@
-package com.finlume.web
+package com.finlume.transport.rest
 
 import com.finlume.core.domain.Account
 import com.finlume.core.domain.Currency

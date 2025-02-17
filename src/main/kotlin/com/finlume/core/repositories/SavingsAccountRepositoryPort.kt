@@ -6,4 +6,5 @@ interface SavingsAccountRepositoryPort {
     fun save(savingsAccount: SavingsAccount): SavingsAccount
     fun findById(id: UUID): SavingsAccount?
     fun findByAccountId(accountId: UUID): List<SavingsAccount>?
+    fun delete(id: UUID)
 }

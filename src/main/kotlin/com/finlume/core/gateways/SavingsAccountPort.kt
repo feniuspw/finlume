@@ -8,12 +8,12 @@ import com.finlume.core.domain.SavingsAccount
 import java.util.*
 
 interface SavingsAccountPort {
-    fun createSavingsAccount(createSavingsAccountCommand: CreateSavingsAccountCommand): SavingsAccount
-    fun updateSavingsAccount(updateSavingsAccountCommand: UpdateSavingsAccountCommand)
+    fun createSavingsAccount(createCommand: CreateSavingsAccountCommand): SavingsAccount
+    fun updateSavingsAccount(updateCommand: UpdateSavingsAccountCommand): SavingsAccount
     fun deleteSavingsAccount(id: UUID)
-    fun findById(id: UUID): SavingsAccount?
-    fun findByAccountId(accountId: UUID): List<SavingsAccount>?
+    fun findSavingsAccountById(id: UUID): SavingsAccount
+    fun findSavingsAccountByAccountId(accountId: UUID): List<SavingsAccount>?
     fun deposit(depositCommand: DepositSavingsAccountCommand)
-    fun withdraw(withdrawSavingsAccountCommand: WithdrawSavingsAccountCommand)
+    fun withdraw(withdrawCommand: WithdrawSavingsAccountCommand)
     fun getBalance(id: UUID): Double
 }
