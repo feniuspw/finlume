@@ -37,15 +37,7 @@ class WalletServiceTest {
             balance = 100.0,
             currencyId = 1
         )
-        // Cria uma wallet esperada
-        val wallet = Wallet(
-            id = UUID.randomUUID(),
-            name = createCommand.name,
-            balance = createCommand.balance,
-            currency = currency,
-            createdAt = LocalDateTime.now(),
-            updatedAt = LocalDateTime.now()
-        )
+
         every { repository.save(any()) } answers { firstArg() }
 
         // Act
