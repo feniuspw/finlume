@@ -1,5 +1,5 @@
 package com.finlume.transport.rest.dto
 
-data class UpdateSavingsAccountBalanceDTO(
+data class UpdateBalanceDTO(
     val amount: Double,
 )

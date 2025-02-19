@@ -5,7 +5,7 @@ import com.finlume.core.domain.SavingsAccount
 import com.finlume.core.gateways.AccountPort
 import com.finlume.core.gateways.SavingsAccountPort
 import com.finlume.transport.rest.dto.CreateSavingsAccountDTO
-import com.finlume.transport.rest.dto.UpdateSavingsAccountBalanceDTO
+import com.finlume.transport.rest.dto.UpdateBalanceDTO
 import com.finlume.transport.rest.dto.UpdateSavingsAccountDTO
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -50,7 +50,7 @@ class SavingsAccountController(
         return ResponseEntity.ok(savingsAccountPort.updateSavingsAccount(updateSavingsAccountCommand))
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     fun deleteSavingsAccount(
         @PathVariable id: UUID
     ): ResponseEntity<Void> {
@@ -84,10 +84,10 @@ class SavingsAccountController(
     @PostMapping("/deposit/{id}")
     fun depositAmountToSavingsAccount(
         @PathVariable id: UUID,
-        @RequestBody request: UpdateSavingsAccountBalanceDTO
+        @RequestBody request: UpdateBalanceDTO
     ): ResponseEntity<Unit> {
 
-        val depositSavingsAccountCommand = DepositSavingsAccountCommand(
+        val depositSavingsAccountCommand = DepositCommand(
             id = id,
             amount = request.amount,
         )
@@ -97,10 +97,10 @@ class SavingsAccountController(
     @PostMapping("/withdraw/{id}")
     fun withdrawAmountFromSavingsAccount(
         @PathVariable id: UUID,
-        @RequestBody request: UpdateSavingsAccountBalanceDTO
+        @RequestBody request: UpdateBalanceDTO
     ): ResponseEntity<Unit> {
 
-        val withdrawSavingsAccountCommand = WithdrawSavingsAccountCommand(
+        val withdrawSavingsAccountCommand = WithdrawCommand(
             id = id,
             amount = request.amount,
         )

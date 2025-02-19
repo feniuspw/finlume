@@ -5,7 +5,7 @@ import com.finlume.core.domain.Account
 import com.finlume.core.domain.SavingsAccount
 import com.finlume.transport.rest.dto.CreateAccountRequestDTO
 import com.finlume.transport.rest.dto.CreateSavingsAccountDTO
-import com.finlume.transport.rest.dto.UpdateSavingsAccountBalanceDTO
+import com.finlume.transport.rest.dto.UpdateBalanceDTO
 import com.finlume.transport.rest.dto.UpdateSavingsAccountDTO
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -121,7 +121,7 @@ class SavingsAccountControllerIntegrationTest @Autowired constructor(
 
     @Test
     fun `POST deposit updates savings account balance`() {
-        val depositDTO = UpdateSavingsAccountBalanceDTO(
+        val depositDTO = UpdateBalanceDTO(
             amount = 50.0
         )
         // Executa depósito
@@ -140,7 +140,7 @@ class SavingsAccountControllerIntegrationTest @Autowired constructor(
 
     @Test
     fun `POST withdraw updates savings account balance`() {
-        val withdrawDTO = UpdateSavingsAccountBalanceDTO(
+        val withdrawDTO = UpdateBalanceDTO(
             amount = 40.0
         )
         // Executa saque

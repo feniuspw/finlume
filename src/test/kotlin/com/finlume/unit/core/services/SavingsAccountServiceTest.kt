@@ -1,9 +1,9 @@
 package com.finlume.unit.core.services
 
 import com.finlume.core.command.CreateSavingsAccountCommand
-import com.finlume.core.command.DepositSavingsAccountCommand
+import com.finlume.core.command.DepositCommand
 import com.finlume.core.command.UpdateSavingsAccountCommand
-import com.finlume.core.command.WithdrawSavingsAccountCommand
+import com.finlume.core.command.WithdrawCommand
 import com.finlume.core.domain.Account
 import com.finlume.core.domain.Currency
 import com.finlume.core.domain.SavingsAccount
@@ -188,7 +188,7 @@ class SavingsAccountServiceTest {
             interestInterval = 30,
             lastInterestRateDate = LocalDateTime.now().minusDays(1)
         )
-        val depositCommand = DepositSavingsAccountCommand(
+        val depositCommand = DepositCommand(
             id = accountId,
             amount = 50.0
         )
@@ -218,7 +218,7 @@ class SavingsAccountServiceTest {
             interestInterval = 30,
             lastInterestRateDate = LocalDateTime.now().minusDays(1)
         )
-        val withdrawCommand = WithdrawSavingsAccountCommand(
+        val withdrawCommand = WithdrawCommand(
             id = accountId,
             amount = 80.0
         )

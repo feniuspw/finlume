@@ -2,7 +2,7 @@ package com.finlume.core.command
 
 import java.util.*
 
-data class DepositSavingsAccountCommand(
+data class WithdrawCommand(
     val id: UUID,
     val amount: Double,
 )

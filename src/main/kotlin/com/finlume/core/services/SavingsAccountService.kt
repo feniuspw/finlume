@@ -1,8 +1,8 @@
 package com.finlume.core.services
 import com.finlume.core.command.CreateSavingsAccountCommand
-import com.finlume.core.command.DepositSavingsAccountCommand
+import com.finlume.core.command.DepositCommand
 import com.finlume.core.command.UpdateSavingsAccountCommand
-import com.finlume.core.command.WithdrawSavingsAccountCommand
+import com.finlume.core.command.WithdrawCommand
 import com.finlume.core.domain.SavingsAccount
 import com.finlume.core.gateways.SavingsAccountPort
 import com.finlume.core.repositories.SavingsAccountRepositoryPort
@@ -48,13 +48,13 @@ class SavingsAccountService(
         return savingsAccountRepository.findByAccountId(accountId)
     }
 
-    override fun deposit(depositCommand: DepositSavingsAccountCommand) {
+    override fun deposit(depositCommand: DepositCommand) {
         val savingsAccount = this.findSavingsAccountById(depositCommand.id)
         savingsAccount.deposit(depositCommand.amount)
         savingsAccountRepository.save(savingsAccount)
     }
 
-    override fun withdraw(withdrawCommand: WithdrawSavingsAccountCommand) {
+    override fun withdraw(withdrawCommand: WithdrawCommand) {
         val savingsAccount = this.findSavingsAccountById(withdrawCommand.id)
         savingsAccount.withdraw(withdrawCommand.amount)
         savingsAccountRepository.save(savingsAccount)
